@@ -10,13 +10,48 @@ public class User {
 	private String username;
 	private String password;
 	private UserType userType;
-	private static int userID = 0;
+	private static int globalUserID;
+	private int userID;
+	private FIle userIdNoFile = new File("./data/useridnumber");
 	
 	public User(String username, String password, UserType userType){
 		this.username = username;
 		this.password = password;
 		this.userType = userType;
-		this.userID++; //This will be changed to put the userID in a file.
+
+		try{
+            if (userIdNoFile.exists()){
+                FileReader file=new FileReader(userIdNoFile);
+                BufferedReader br=new BufferedReader(file);
+                String value=br.readLine();
+                globalUserID=Integer.parseInt(value);
+                
+				userIdNoFile.delete();
+				br.close();
+
+            }else{
+                globalUserID=0;
+            }
+        }catch(NumberFormatException e){
+            e.printStackTrace();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+		}
+		
+		this.userID=++globalUserID;
+
+		try{
+            PrintWriter writer=new PrintWriter(userIdNoFile);
+            userIdNoFile.createNewFile();
+            writer.write(String.valueOf(userID));
+            writer.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+		}
 	}
 
 	public String changeUsername(String oldUserName, String newUserName) {

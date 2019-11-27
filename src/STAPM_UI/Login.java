@@ -1,11 +1,22 @@
 package STAPM_UI;
 import mgmt.*;
 
-import java.awt.*;
-import java.awt.event.*;
-
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame{
 
@@ -98,10 +109,13 @@ public class Login extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Login Attempt");
 				if(stapm.userValidation(usernameField.getText(), passwordField.getText())) {
-					Main mainSystem = new Main(stapm);
-					mainSystem.setVisible(true);
+					//Main mainSystem = new Main(stapm);
+					//mainSystem.setVisible(true);
+					HomeScreen homescreen = new HomeScreen(stapm);
+					homescreen.frame.setVisible(true);
 					frame.setVisible(false);
 					System.out.println("Login Successful");
+					homescreen.frame.setVisible(true);
 				}else{
 					usernameField.setForeground(Color.RED);
 					passwordField.setForeground(Color.RED);

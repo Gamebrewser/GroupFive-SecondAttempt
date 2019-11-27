@@ -11,11 +11,14 @@ import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+
+import mgmt.STAPM;
+
 import javax.swing.JButton;
 
-public class AddStockGUI {
+public class UpdateStockGUI {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -27,7 +30,8 @@ public class AddStockGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddStockGUI window = new AddStockGUI();
+					STAPM stapm = null;
+					UpdateStockGUI window = new UpdateStockGUI(stapm);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +43,7 @@ public class AddStockGUI {
 	/**
 	 * Create the application.
 	 */
-	public AddStockGUI() {
+	public	UpdateStockGUI(STAPM stapm) {
 		initialize();
 	}
 

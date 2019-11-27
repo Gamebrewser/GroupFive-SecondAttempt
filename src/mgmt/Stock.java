@@ -46,16 +46,30 @@ public class Stock {
 	}
 
 	//User must increase or decrease item based on ID
-
-	//Finish this
 	public String increaseStockItem(int itemID, int qtyAdded){
 		//add the parameter given
-		return "";
+		int qtyToAdd;
+		for(Item i: items){
+			if(i.getItemID() == itemID){
+				qtyToAdd=(i.getQuantityInStock()) + qtyAdded;
+				i.setQuantityInStock(qtyToAdd);
+				return "Quantity update successful";
+			}
+		}
+		return "Quantity update unsucessful";
 	}
 
-	//Finish this
+	
 	public String decreaseStockItem(int itemID, int qtyDecreased){
 		//subtract the parameter given
-		return "";
+		int qtyToDecrease;
+		for(Item i: items){
+			if(i.getItemID() == itemID){
+				qtyToDecrease=(i.getQuantityInStock()) - qtyDecreased;
+				i.setQuantityInStock(qtyToDecrease);
+				return "Quantity update successful";
+			}
+		}
+		return "Quantity update unsucessful";
 	}
 }

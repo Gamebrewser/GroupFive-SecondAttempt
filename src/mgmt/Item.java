@@ -2,7 +2,8 @@ package mgmt;
 
 import java.text.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
+import java.io.*;
 
 public class Item {
 	private String itemName;
@@ -11,9 +12,11 @@ public class Item {
 	private String manufacturer;
 	private boolean taxable;
 	private Date dateAdded;
-	private static int itemID = 0;
-	//private double taxRate; put in Sale so that everything gets taxed.
+	private static int globalItemID;
+	private int itemID;
+	private File itemNoFile = new File("./data/itemnumber");
 	
+	//private double taxRate; put in Sale so that everything gets taxed.
 	public Item(String name, int qty, double price, String manufacturer, boolean taxable)
 	{
 		this.itemName = name;
@@ -32,6 +35,42 @@ public class Item {
 		this.manufacturer=manufacturer;
 		this.taxable=taxable;
 		this.dateAdded = date;
+
+		//This writes and reads entry number to/from a file
+		try{
+            if (itemNoFile.exists()){
+                FileReader file=new FileReader(itemNoFile);
+                BufferedReader br=new BufferedReader(file);
+                String value=br.readLine();
+                globalItemID=Integer.parseInt(value);
+                
+				itemNoFile.delete();
+				br.close();
+
+            }else{
+                globalItemID=0;
+            }
+        }catch(NumberFormatException e){
+            e.printStackTrace();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+		}
+		
+		this.itemID=++globalItemID;
+
+		try{
+            PrintWriter writer=new PrintWriter(itemNoFile);
+            itemNoFile.createNewFile();
+            writer.write(String.valueOf(itemID));
+            writer.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+		}
+		
 	}
 
 	public String getItemName() {
@@ -46,13 +85,10 @@ public class Item {
 		return quantityInStock;
 	}
 	
-	//Lets take this out, I will explain it to you
-	/*
 	public void setQuantityInStock(int quantityInStock) {
 		this.quantityInStock = quantityInStock;
 	}
-	*/
-
+	
 	public double getPrice() {
 		return this.price;
 	}
@@ -88,7 +124,7 @@ public class Item {
 
 	public String toString(){
 		return (" ID: " + getItemID() + "Name: " + getItemName() + "Manufacturer: " + manufacturer
-		+ "Price: $" + getPrice() + "Qty in Stock: " + getQuantityInStock() );
+		+ "Price: $" + getPrice() + "Qty in Stock: " + getQuantityInStock() + "\n" );
 	}
 	
 	

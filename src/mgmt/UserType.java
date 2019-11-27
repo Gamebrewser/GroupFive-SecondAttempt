@@ -1,5 +1,5 @@
-package mgmt;
+	package mgmt;
 
 public enum UserType {
-
+    Manager, Owner
 }
