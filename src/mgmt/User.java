@@ -1,5 +1,8 @@
 package mgmt;
 
+import java.util.*;
+import java.io.*;
+
 /**
  * This class represents an user of the system
  * @@author GroupFive
@@ -12,7 +15,7 @@ public class User {
 	private UserType userType;
 	private static int globalUserID;
 	private int userID;
-	private FIle userIdNoFile = new File("./data/useridnumber");
+	private File userIdNoFile = new File("./data/useridnumber");
 	
 	public User(String username, String password, UserType userType){
 		this.username = username;

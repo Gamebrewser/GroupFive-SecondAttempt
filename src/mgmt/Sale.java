@@ -1,6 +1,6 @@
 package mgmt;
 
-import java.util.Date;
+import java.util.*;
 import java.io.*;
 
 public class Sale {
@@ -11,7 +11,7 @@ public class Sale {
 
 	
 	public void addItem(SaleItem saleItem){
-		card.add(saleItem);
+		cart.add(saleItem);
 	}
 
 	//If a customer no longer wants an item, ensure to add back the quantity
