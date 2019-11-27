@@ -15,17 +15,10 @@ import utilities.DataManager;
 public final class STAPM implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static ArrayList<Item> items = new ArrayList<Item>();
-	private static ArrayList<User> users = new ArrayList<User>();
+	private static ArrayList<User> users = new ArrayList<User>(); //Stores list of users. (optional)
 	private String name;
 	private User currentUser; // We will use this for access control
 
-	/* E.g, if (currentUser.getUserType == User.OWNER){
-				write code to get financial report
-			else{
-				tell the user they dont haver permission
-			}
-	}
-	*/
 
 	public STAPM() {
 		this.name =  "Steer Town Auto Parts";
